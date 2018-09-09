@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 McDonald's. All rights reserved.
+ * Copyright (c) 2018 Sapient. All rights reserved.
  * Created by Devishankar Ramasamy on 19-Aug-2018.
  */
 
@@ -8,7 +8,9 @@ package com.sapient.rxrealm.model;
 import android.support.annotation.IntRange;
 import android.support.annotation.Nullable;
 
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
+import com.sapient.rxrealm.internal.ProductNameDeserializer;
 
 import java.util.Date;
 import java.util.List;
@@ -124,6 +126,9 @@ public class Product implements RealmModel {
     private SmartRouting smartRouting;
     @SerializedName("TimeRestriction")
     private RealmList<TimeRestriction> timeRestrictions;
+    @JsonAdapter(ProductNameDeserializer.class)
+    @SerializedName("Names")
+    private ProductName productName;
 
     // This is not available directly from catalog, we create a fake variable
     // & assign it's value in runtime from downloaded catalog.
@@ -380,6 +385,14 @@ public class Product implements RealmModel {
 
     public void setProcessed(boolean processed) {
         isProcessed = processed;
+    }
+
+    public ProductName getProductName() {
+        return productName;
+    }
+
+    public void setProductName(ProductName productName) {
+        this.productName = productName;
     }
 
     /**

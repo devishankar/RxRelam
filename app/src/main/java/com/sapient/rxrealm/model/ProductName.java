@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2018 McDonald's. All rights reserved.
- * Created by Devishankar Ramasamy on 19-Aug-2018.
+ * Copyright (c) 2018 Sapient. All rights reserved.
+ * Created by Devishankar Ramasamy on 10-Nov-2017.
  */
 
 package com.sapient.rxrealm.model;
@@ -11,9 +11,6 @@ import io.realm.RealmModel;
 import io.realm.annotations.Index;
 import io.realm.annotations.RealmClass;
 
-/**
- * @see <a href="https://us-jira.mcd.com/browse/SDK-7626">SDK-7626</a>
- */
 @RealmClass
 public class ProductName implements RealmModel {
 

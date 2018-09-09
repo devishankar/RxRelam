@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 McDonald's. All rights reserved.
+ * Copyright (c) 2018 Sapient. All rights reserved.
  * Created by Devishankar Ramasamy on 19-Aug-2018.
  */
 

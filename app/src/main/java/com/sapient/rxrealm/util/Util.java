@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 McDonald's. All rights reserved.
+ * Copyright (c) 2018 Sapient. All rights reserved.
  * Created by Devishankar Ramasamy on 19-Aug-2018.
  */
 
@@ -7,6 +7,8 @@ package com.sapient.rxrealm.util;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Looper;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
@@ -68,5 +70,10 @@ public class Util {
 
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
+    }
+
+    public static void isInMainThread() {
+        boolean main = Looper.getMainLooper().getThread().getId() == Thread.currentThread().getId();
+        Log.d("Is user in main thread", main ? "True" : "False");
     }
 }

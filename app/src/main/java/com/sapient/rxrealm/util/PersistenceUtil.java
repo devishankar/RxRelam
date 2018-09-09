@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 McDonald's. All rights reserved.
+ * Copyright (c) 2018 Sapient. All rights reserved.
  * Created by Devishankar Ramasamy on 19-Aug-2018.
  */
 
@@ -16,6 +16,7 @@ import io.realm.RealmResults;
 public class PersistenceUtil {
 
     public static Realm getStorage(String suffix) {
+        Util.isInMainThread();
         RealmConfiguration config = new RealmConfiguration.Builder()
                 .name("storage_" + suffix)
                 .build();
@@ -24,25 +25,13 @@ public class PersistenceUtil {
     }
 
     public static void insertDataWithClose(String name, List<Product> allProducts) {
-        Realm realm = getStorage(name);
-        realm.beginTransaction();
-        realm.insertOrUpdate(allProducts);
-        realm.commitTransaction();
-        realm.close();
-    }
-
-    public static List<Product> getDetachedProduct(String name) {
-        Realm realm = getStorage(name);
-        RealmResults<Product> results = realm.where(Product.class).findAll();
-
-        return realm.copyFromRealm(results);
-    }
-
-    public static List<Product> getDetachedProducts(String name) {
-        Realm realm = getStorage(name);
-        RealmResults<Product> results = realm.where(Product.class).findAll();
-
-        return realm.copyFromRealm(results);
+        for (Product product : allProducts) {
+            Realm realm = getStorage(name);
+            realm.beginTransaction();
+            realm.insertOrUpdate(product);
+            realm.commitTransaction();
+            realm.close();
+        }
     }
 
     public static RealmResults<Product> getProducts(String name) {
